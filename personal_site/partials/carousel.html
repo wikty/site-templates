@@ -1,0 +1,37 @@
+<!-- A slideshow component for cycling through elements—images or slides of text—like a carousel. It also includes support for previous/next controls and indicators. Please be aware that nested carousels are not supported. -->
+<!-- 
+Note:
+* Carousels don’t automatically normalize slide dimensions. As such, you may need to use additional utilities or custom styles to appropriately size content. 
+* The .active class needs to be added to one of the slides otherwise the carousel will not be visible.
+* Set a unique id on the .carousel for optional controls indicators, especially if you’re using multiple carousels on a single page.
+* Control and indicator elements must have a data-target attribute (or href for links) that matches the id of the .carousel element.
+-->
+<div id="{{ carousel.id }}" class="carousel slide {{ "carousel-fade" if carousel.fade else "" }}" data-ride="carousel">
+  <ol class="carousel-indicators">
+    {% for i in range(carousel.slides|length) %}
+    <li data-target="#{{ carousel.id }}" data-slide-to="{{ i }}" class="{{ "active" if i == 0 else "" }}"></li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+    {% for slide in carousel.slides %}
+    <div class="carousel-item {{ "active" if slide.active else "" }}">
+      <img class="{{ carousel.image_class }}" src="{{ slide.image }}">
+      <!-- We hide them initially with .d-none and bring them back on medium-sized devices with .d-md-block. -->
+      {% if slide.title or slide.description %}
+      <div class="carousel-caption d-none d-md-block">
+        {% if slide.title %}<h5>{{ slide.title }}</h5>{% endif %}
+        {% if slide.description %}<p>{{ slide.description }}</p>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#{{ carousel.id }}" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#{{ carousel.id }}" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
