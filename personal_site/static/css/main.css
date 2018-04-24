@@ -1,0 +1,16 @@
+body {
+  min-height: 75rem;
+}
+
+#page-footer>div:first-child {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+#page-footer>div:first-child p {
+    margin-bottom: .25rem;  
+}
+
+#page-footer>div:first-child p:last-child {
+    margin-bottom: 0;  
+}

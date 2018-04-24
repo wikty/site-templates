@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="{{ language }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block meta %}{% endblock %}
+    <link rel="icon" href="favicon.ico">
+    <link href="/css/main.css" rel="stylesheet">
+    <title>{{ title }}</title>
+
+    {{ bootstrap_css_tag }}
+
+    {% block static %}{% endblock %}
+
+    {% block style %}
+    <style type="text/css">
+      {% if navbar.position == "top" %}
+      body {
+        padding-top: 4.5rem!important;
+      }
+      {% elif navbar.position == "bottom" %}
+      body {
+        padding-bottom: 4.5rem!important;
+      }
+      {% elif navbar.position == "static" %}
+      /* add margin-bottom in navbar */
+      {% endif %}
+
+      {% if footer.border_top %}
+      #page-footer>div:first-child {
+        border-top: {{ footer.border_top  }}
+      }
+      {% endif %}
+    </style>
+    {% endblock %}
+  </head>
+  <body>
+
+    <header id="page-header">
+      {% block header %}{% include "partials/header.html" %}{% endblock %}
+    </header>
+
+    <main role="main" id="page-main">
+      {% block main %}{% endblock %}
+    </main>
+
+    <footer id="page-footer">
+      {% block footer %}{% include "partials/footer.html" %}{% endblock %}
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {{ jquery_js_tag }}
+    {{ popper_js_tag }}
+    {{ bootstrap_js_tag }}
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

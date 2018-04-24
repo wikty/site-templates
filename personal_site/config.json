@@ -1,0 +1,83 @@
+{
+    "global": {
+        "title": "Title for all of templates",
+        "language": "zh-cn",
+        "navbar": {
+            "id": "navbar",
+            "container": true,
+            "rounded": false,
+            "position": "top",
+            "bg_mode_class": "navbar-dark",
+            "bg_color_class": "bg-dark",
+            "collapse_breakpoint": "md",
+            "brand": {
+                "title": "Navbar",
+                "link": "#",
+                "image": {
+                    "link": "/img/bootstrap-solid.svg",
+                    "width": 30,
+                    "height": 30,
+                    "alt": "Brand Image"
+                }
+            },
+            "items": [{
+                "title": "Home",
+                "link": "/"
+            },{
+                "title": "Gallery",
+                "link": "/gallery/"
+            }],
+            "_comment_": {
+                "position": "top, bottom, static",
+                "bg-mode-class": "navbar-dark, navbar-light",
+                "bg-color-class": "bg-*",
+                "collapse-breakpoint": "sm, md, lg, xl",
+                "brand": "add title or image, yeah you can add both of them",
+                "items": "conflict with items(), please using ['items'] in template"
+            }
+        },
+        "footer": {
+            "container": true,
+            "border_top": ".05rem solid #e5e5e5"
+        }
+    },
+    "local": {
+        "gallery": {
+            "title": "Title for gallery",
+            "navbar": {
+                "position": "static"
+            }
+        },
+        "gallery/index.html": {
+            "title": "Title for gallery's index",
+            "cards": [{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            },{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            },{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            },{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            },{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            },{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            },{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            },{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            },{
+                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
+                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+            }]
+        }
+    }
+}
