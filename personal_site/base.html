@@ -48,11 +48,14 @@
       {% block footer %}{% include "partials/footer.html" %}{% endblock %}
     </footer>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Bootstrap Dependencies: jQuery first, then Popper.js, then Bootstrap JS -->
     {{ jquery_js_tag }}
     {{ popper_js_tag }}
     {{ bootstrap_js_tag }}
+    <!-- End of Bootstrap Dependencies -->
+    <!-- Optional JavaScript -->
+    {{ holder_js_tag }}
+    {{ clipboard_js_tag }}
     {% block scripts %}{% endblock %}
     <script src="/js/main.js"></script>
   </body>
