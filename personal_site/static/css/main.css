@@ -14,3 +14,61 @@ body {
 #page-footer>div:first-child p:last-child {
     margin-bottom: 0;  
 }
+
+
+/* the copy button for code snippets */
+/*.code-snippet {
+    
+}
+.bd-clipboard {
+  position: relative;
+  display: none;
+  float: right;
+}
+.bd-clipboard + .highlight {
+  margin-top: 0;
+}
+.btn-clipboard {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+  display: block;
+  padding: 0.25rem 0.5rem;
+  font-size: 75%;
+  color: #818a91;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0.25rem;
+}
+.btn-clipboard:hover {
+  color: #fff;
+  background-color: #027de7;
+}
+@media (min-width: 768px) {
+  .bd-clipboard {
+    display: block;
+  }
+}*/
+
+/* code snippets style 
+.highlight {
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.highlight pre {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  border: 0;
+}
+
+.highlight pre code {
+  font-size: inherit;
+}*/
