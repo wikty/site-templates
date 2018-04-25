@@ -13,6 +13,11 @@ $(function () {
   });
 });
 
+// Init Tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
 // Init Clipboard
 $(function () {
   // Enable clipboard.js
