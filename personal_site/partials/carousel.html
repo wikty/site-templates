@@ -5,6 +5,7 @@ Note:
 * The .active class needs to be added to one of the slides otherwise the carousel will not be visible.
 * Set a unique id on the .carousel for optional controls indicators, especially if you’re using multiple carousels on a single page.
 * Control and indicator elements must have a data-target attribute (or href for links) that matches the id of the .carousel element.
+* The data-ride="carousel" attribute is used to mark a carousel as animating starting at page load.
 -->
 <div id="{{ carousel.id }}" class="carousel slide {{ "carousel-fade" if carousel.fade else "" }}" data-ride="carousel">
   <ol class="carousel-indicators">

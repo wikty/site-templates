@@ -64,15 +64,15 @@
             "image_class": "d-block w-100",
             "slides": [{
                 "active": true,
-                "image": "holder.js/800x400?auto=yes&bg=555&fg=333&text=First Slide",
+                "image": "/img/slide1.jpg",
                 "title": "First Slide",
                 "description": "first slide description"
             },{
-                "image": "holder.js/800x400?auto=yes&bg=555&fg=333&text=Second Slide",
+                "image": "/img/slide2.jpg",
                 "title": "Second Slide",
                 "description": "second slide description"
             },{
-                "image": "holder.js/800x400?auto=yes&bg=555&fg=333&text=Third Slide",
+                "image": "/img/slide3.jpg",
                 "title": "Third Slide",
                 "description": "third slide description"
             }]
