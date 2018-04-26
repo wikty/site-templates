@@ -15,6 +15,91 @@ body {
     margin-bottom: 0;  
 }
 
+/* clipboard svg img within button */
+.btn .clippy {
+    margin-top: -3px;
+    position: relative;
+    top: 3px;
+}
+.btn[disabled] .clippy{
+    opacity:.3
+}
+
+/* code snippet */
+.code-snippet {
+    font: 12px Consolas,liberation mono,Menlo,Courier,monospace;
+    position: relative;
+    overflow: visible;
+}
+.code-snippet code {
+    font-size: 14px;
+    line-height: 20px;
+    background-color:#e8f5f2;
+    border-radius:3px;
+    color:#1bc1a1;
+    font-size:85%;
+    margin:0;
+    padding:.2em
+}
+/* clipboard trigger button of code snippet */
+.code-snippet .clipboard-trigger {
+    -webkit-transition:opacity .3s ease-in-out;
+    -o-transition:opacity .3s ease-in-out;
+    transition:opacity .3s ease-in-out;
+    opacity:0;
+    padding:2px 6px;
+    position:absolute;
+    right:4px;
+    top:4px
+}
+.code-snippet:hover .clipboard-trigger,.code-snippet .clipboard-trigger:focus{
+    opacity:1
+}
+@media screen and (max-width:768px){
+    .code-snippet .clipboard-trigger{
+        opacity:1
+    }
+}
+
+/* example panel */
+.example{
+    position:relative;
+    margin:15px 0 0;
+    padding:39px 19px 14px;
+    background-color:#fff;
+    border-radius:4px 4px 0 0;
+    border:1px solid #ddd;
+    z-index:2
+}
+.example p{
+    color:#666
+}
+.example:after{
+    content:"Example";
+    position:absolute;
+    top:0;
+    left:0;
+    padding:2px 8px;
+    font-size:12px;
+    font-weight:700;
+    background-color:#f5f5f5;
+    color:#9da0a4;
+    border-radius:4px 0 4px 0
+}
+/* code snippet follows example panel */
+.example+.code-snippet{
+    background:#f8f8f8;
+    border-radius:4px;
+    border:1px solid #ddd;
+    clear:both;
+    top:-20px;
+    padding:20px 0 0
+}
+.example+.code-snippet .clipboard-trigger{
+    top:22px;
+    right:2px
+}
+
 
 /* the copy button for code snippets */
 /*.code-snippet {
