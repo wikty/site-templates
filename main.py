@@ -6,6 +6,7 @@ import shutil
 import hashlib
 import os
 import json
+import signal
 import argparse
 import threading
 import http.server
@@ -198,18 +199,39 @@ def hashsite(site_dir, exclude_regex=r''):
 
     return hashdir(site_dir, hashlib.sha256()).digest()
 
-def watcher(src_dir, dest_dir, renderer, render_kwargs, exclude_regex, msg_file, interval=1):
-    oldhash = hashsite(src_dir, exclude_regex)
-    while True:
-        time.sleep(interval)
-        newhash = hashsite(src_dir, exclude_regex)
-        if oldhash != newhash:
-            oldhash = newhash
-            message('Watcher',
-                    'Site changed, start re-render it')
-            renderer(**render_kwargs)
-            message('Watcher',
-                    'Site render is done!')
+class WatchThread(threading.Thread):
+
+    def __init__(self, *args, **kwargs):
+        '''
+        args, kwargs: for thread's worker/target function
+        '''
+        super().__init__()
+        self.args = args
+        self.kwargs = kwargs
+        # watch interval seconds
+        self.interval = 1
+        # stop flag event
+        self.stop_event = threading.Event()
+
+    def stop(self):
+        self.stop_event.set()
+
+    def worker(self, src_dir, dest_dir, renderer, render_kwargs, exclude_regex, msg_file):
+        oldhash = hashsite(src_dir, exclude_regex)
+        while True:
+            if self.stop_event.is_set():
+                break
+            time.sleep(self.interval)
+            newhash = hashsite(src_dir, exclude_regex)
+            if oldhash != newhash:
+                oldhash = newhash
+                message('Watcher', 'Site changed, start re-render it')
+                renderer(**render_kwargs)
+                message('Watcher', 'Site render is done!')
+        message('Watcher', 'Bye! Bye!')
+
+    def run(self):
+        self.worker(*self.args, **self.kwargs)
 
 class HTTPHandler(SimpleHTTPRequestHandler):
     def translate_path(self, path):
@@ -229,6 +251,7 @@ class HTTPServer(BaseHTTPServer):
         self.root_dir = root_dir
 
 def server(current_dir, root_dir, port, msg_file):
+    # start server in current working directory
     # Handler = http.server.SimpleHTTPRequestHandler
     # httpd = socketserver.TCPServer(("", port), Handler)
     # message('Server',
@@ -236,6 +259,8 @@ def server(current_dir, root_dir, port, msg_file):
     #         msg_file,
     #         **{'listening on port': port})
     # httpd.serve_forever()
+
+    # start server in root_dir directory
     httpd = HTTPServer(current_dir, root_dir, ("", port))
     message('Server',
             'start server',
@@ -243,35 +268,44 @@ def server(current_dir, root_dir, port, msg_file):
             **{'listening on port': port})
     httpd.serve_forever()
 
-def server_site(site, port, watch, server, watcher, renderer, render_kwargs):
+def server_site(site, port, watching, renderer, render_kwargs):
     site_dir = config.sites[site]['path']
     msg_file = render_kwargs['msg_file']
     output_dirname = render_kwargs['output_dirname']
     output_dir = os.path.join(site_dir, output_dirname)
     current_dir = os.getcwd()
+    # start watch thread(optional)
+    watch_thread = None
+    if watching:
+        regex = re.compile(r'(\.md$|{})'.format(output_dirname))
+        watch_thread = WatchThread(site_dir, 
+                                  output_dir, 
+                                  renderer, 
+                                  render_kwargs,
+                                  regex,
+                                  msg_file)
+        watch_thread.start()
+        # watch_thread = threading.Thread(name="watcher",
+        #                                 target=watcher,
+        #                                 args=(site_dir, 
+        #                                       output_dir, 
+        #                                       renderer, 
+        #                                       render_kwargs,
+        #                                       regex,
+        #                                       msg_file,
+        #                                       event))
+        # watch_thread.start()
+    # start server in main thread, so that KeyboardInterrupt can be captured
     try:
-        server_thread = threading.Thread(name="server",
-                                         target=server, 
-                                         args=(current_dir, 
-                                               output_dir, 
-                                               port, 
-                                               msg_file))
-        server_thread.start()
-        if watch:
-            regex = re.compile(r'(\.md$|{})'.format(output_dirname))
-            watch_thread = threading.Thread(name="watcher",
-                                            target=watcher,
-                                            args=(site_dir, 
-                                                  output_dir, 
-                                                  renderer, 
-                                                  render_kwargs,
-                                                  regex,
-                                                  msg_file))
-            watch_thread.start()
+        server(current_dir, output_dir, port, msg_file)
     except KeyboardInterrupt:
+        # elegant termination watcher thread
+        if watch_thread is not None:
+            watch_thread.stop()
+            watch_thread.join()
         message('Server',
-                'Bye, Bye!',
-                msg_file)
+            'Bye, Bye!',
+            msg_file)
 
 
 if __name__ == '__main__':
@@ -361,7 +395,5 @@ if __name__ == '__main__':
         server_site(site, 
                     args.port,
                     args.watch,
-                    server,
-                    watcher,
                     render_site,
                     render_kwargs)
