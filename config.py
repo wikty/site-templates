@@ -22,7 +22,9 @@ params = {
 }
 
 
+site_static_dirname = 'static'
+site_output_dirname = 'output'
+site_tpl_encoding = 'utf8'
 site_cfg_filename = 'config.json'
-site_static_dir = 'static'
 
-site_output_dir = 'output'
+server_port = 80
