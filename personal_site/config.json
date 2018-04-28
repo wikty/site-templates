@@ -35,10 +35,10 @@
                 "link": "/"
             },{
                 "title": "Gallery - card",
-                "link": "/gallery/card.html"
+                "link": "/gallery-card.html"
             },{
                 "title": "Gallery - thumbnail",
-                "link": "/gallery/thumbnail.html"
+                "link": "/gallery-thumbnail.html"
             }],
             "_comment_": {
                 "position": "top, bottom, static",
