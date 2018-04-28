@@ -22,6 +22,18 @@
                 "tag": "a, button"
             }
         },
+        "breadcrumb": {
+            "crumbs": [{
+                "title": "Home",
+                "link": "/"
+            },{
+                "title": "Library",
+                "link": "/library"
+            },{
+                "title": "Data",
+                "link": "/library/data"
+            }]
+        },
         "navbar": {
             "id": "navbar",
             "container": true,
