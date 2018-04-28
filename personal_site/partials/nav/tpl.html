@@ -1,0 +1,40 @@
+{% if nav.alignment == "left" %}
+  {% set alignment = "justify-content-start" %}
+{% elif nav.alignment == "right" %}
+  {% set alignment = "justify-content-end" %}
+{% elif nav.alignment == "center" %}
+  {% set alignment = "justify-content-center" %}
+{% else %}
+  {% set alignment = "" %}
+{% endif %}
+
+{% if nav.mode == "tab" %}
+  {% set mode = "nav-tabs" %}
+{% elif nav.mode == "pill" %}
+  {% set mode = "nav-pills" %}
+{% else %}
+  {% set mode = "" %}
+{% endif %}
+
+{% if nav.extend == "fill" %}
+  {% set extend = "nav-fill" %}
+{% elif nav.mode == "justified" %}
+  {% set extend = "nav-justified" %}
+{% else %}
+  {% set extend = "" %}
+{% endif %}
+
+<ul class="nav {{ mode }} {{ alignment }} {{ extend }}">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+</ul>

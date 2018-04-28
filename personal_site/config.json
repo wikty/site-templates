@@ -123,6 +123,16 @@
             "clipboard_enable_attrname": "data-clipboard-snippet",
             "clipboard_button_svg": "/img/clippy.svg"
         },
+        "nav": {
+            "mode": "tab",
+            "alignment": "right",
+            "extend": "justified",
+            "_comment_": {
+                "mode": ", tab, pill",
+                "alignment": ", left, right, center",
+                "extend": ", fill, justified"
+            }
+        },
         "navbar": {
             "id": "navbar",
             "container": true,
