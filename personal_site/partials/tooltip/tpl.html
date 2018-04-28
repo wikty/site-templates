@@ -1,4 +1,4 @@
-<{{ tooltip.tag }} data-toggle="tooltip" data-placement="{{ tooltip.direction }}" data-trigger="{{ tooltip.trigger }}" title="I'm tips content">
+<{{ tooltip.tag }} {{ 'href="#"' if tooltip.tag == "a" else "" }} data-toggle="tooltip" data-placement="{{ tooltip.direction }}" data-trigger="{{ tooltip.trigger }}" title="I'm tips content">
 Hover or Click me to show tips
 </{{ tooltip.tag }}>
 

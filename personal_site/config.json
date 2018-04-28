@@ -107,7 +107,7 @@
             }
         },
         "tooltip": {
-            "tag": "button",
+            "tag": "a",
             "direction": "top",
             "trigger": "hover focus",
             "_comment_": {
