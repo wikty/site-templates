@@ -1,0 +1,20 @@
+<h2>Clipboard</h2>
+<p>require clipboard.js</p>
+<p>please use javascript to approach advanced usage.</p>
+
+<h3>Copy</h3>
+<!-- Target -->
+<input id="clipboard-copy" value="https://github.com/zenorocha/clipboard.js.git">
+<!-- Trigger -->
+<button class="btn-clipboard" data-clipboard-target="#clipboard-copy">
+    Copy to clipboard
+    <img width="16" src="/img/clippy.svg" alt="Copy to clipboard">
+</button>
+
+<h3>Cut</h3>
+<!-- Target -->
+<textarea id="clipboard-cut">Mussum ipsum cacilds...</textarea>
+<!-- Trigger -->
+<button class="btn-clipboard" data-clipboard-action="cut" data-clipboard-target="#clipboard-cut">
+    Cut to clipboard
+</button>
