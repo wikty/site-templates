@@ -34,6 +34,34 @@
                 "link": "/library/data"
             }]
         },
+        "carousel": {
+            "id_prefix": "carousel",
+            "mode": "slide",
+            "controls": true,
+            "indicators": true,
+            "slides": [{
+                "image": "holder.js/800x400?auto=yes&bg=777&fg=555&text=First slide",
+                "caption": {
+                    "title": "First Slide",
+                    "description": "first slide description"
+                }
+            },{
+                "image": "holder.js/800x400?auto=yes&bg=666&fg=444&text=Second slide",
+                "caption": {
+                    "title": "Second Slide",
+                    "description": "second slide description"
+                }
+            },{
+                "image": "holder.js/800x400?auto=yes&bg=555&fg=333&text=Third slide",
+                "caption": {
+                    "title": "Third Slide",
+                    "description": "third slide description"
+                }
+            }],
+            "_comment_": {
+                "mode": "slide, fade"
+            }
+        },
         "navbar": {
             "id": "navbar",
             "container": true,
@@ -74,27 +102,6 @@
         "footer": {
             "container": true,
             "border_top": ".05rem solid #e5e5e5"
-        },
-        "carousel": {
-            "id": "carousel-01",
-            "fade": false,
-            "controls": true,
-            "indicators": true,
-            "image_class": "d-block w-100",
-            "slides": [{
-                "active": true,
-                "image": "/img/slide1.jpg",
-                "title": "First Slide",
-                "description": "first slide description"
-            },{
-                "image": "/img/slide2.jpg",
-                "title": "Second Slide",
-                "description": "second slide description"
-            },{
-                "image": "/img/slide3.jpg",
-                "title": "Third Slide",
-                "description": "third slide description"
-            }]
         }
     },
     "local": {
