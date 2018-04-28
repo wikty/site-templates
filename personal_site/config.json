@@ -2,6 +2,7 @@
     "global": {
         "title": "Title for all of templates",
         "language": "zh-cn",
+        "copyright": "Company, Inc.",
         "jumbotron": {
             "fullwidth": true,
             "alignment": "left",
@@ -161,7 +162,8 @@
         },
         "footer": {
             "container": true,
-            "border_top": ".05rem solid #e5e5e5"
+            "border_top": true,
+            "color": "muted"
         }
     },
     "local": {

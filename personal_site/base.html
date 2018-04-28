@@ -25,12 +25,6 @@
       {% elif navbar.position == "static" %}
       /* add margin-bottom in navbar */
       {% endif %}
-
-      {% if footer.border_top %}
-      #page-footer>div:first-child {
-        border-top: {{ footer.border_top  }}
-      }
-      {% endif %}
     </style>
     {% endblock %}
   </head>
@@ -45,7 +39,7 @@
     </main>
 
     <footer id="page-footer">
-      {% block footer %}{% include "partials/footer.html" %}{% endblock %}
+      {% block footer %}{% include "partials/footer/tpl.html" %}{% endblock %}
     </footer>
 
     <!-- Bootstrap Dependencies: jQuery first, then Popper.js, then Bootstrap JS -->
