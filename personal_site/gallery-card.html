@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% block header %}
-    {% include "partials/collapse-header.html" %}
+    {% include "partials/header/collapse.html" %}
 {% endblock %}
 {% block static %}
     <link href="/css/gallery.css" rel="stylesheet">
 {% endblock %}
 {% block main %}
-      
       {% include "partials/jumbotron/tpl.html" %}
       {% include "partials/gallery/card.html" %}
 {% endblock %}
