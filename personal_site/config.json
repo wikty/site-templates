@@ -34,8 +34,11 @@
                 "title": "Home",
                 "link": "/"
             },{
-                "title": "Gallery",
-                "link": "/gallery/"
+                "title": "Gallery - card",
+                "link": "/gallery/card.html"
+            },{
+                "title": "Gallery - thumbnail",
+                "link": "/gallery/thumbnail.html"
             }],
             "_comment_": {
                 "position": "top, bottom, static",
@@ -89,37 +92,6 @@
             "navbar": {
                 "position": "static"
             }
-        },
-        "gallery/index.html": {
-            "title": "Title for gallery's index",
-            "cards": [{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            },{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            },{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            },{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            },{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            },{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            },{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            },{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            },{
-                "image": "holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail",
-                "text": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-            }]
         }
     }
 }
