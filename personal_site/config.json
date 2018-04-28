@@ -12,6 +12,16 @@
                 "alignment": "justify, left, right, center"
             }
         },
+        "popover": {
+            "mode": "toggle",
+            "direction": "right",
+            "tag": "button",
+            "_comment_": {
+                "mode": "toggle, dismiss",
+                "direction": "left, right, top, bottom",
+                "tag": "a, button"
+            }
+        },
         "navbar": {
             "id": "navbar",
             "container": true,
@@ -52,12 +62,6 @@
         "footer": {
             "container": true,
             "border_top": ".05rem solid #e5e5e5"
-        },
-        "popover": {
-            "direction": "right",
-            "_comment_": {
-                "direction": "left, right, top, bottom"
-            }
         },
         "carousel": {
             "id": "carousel-01",

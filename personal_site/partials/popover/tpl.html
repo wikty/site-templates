@@ -1,0 +1,16 @@
+{% if popover.mode == "toggle" %}
+  {% set popover_class = "popover-toggle" %}
+{% elif popover.mode == "dismiss" %}
+  {% set popover_class = "popover-dismiss" %}
+{% else %}
+  {% set popover_class = "popover-toggle" %}
+{% endif %}
+
+{% set popover_tag = "button" if popover.tag == "button" else "a" %}
+{% set popover_direction = popover.direction %}
+
+{% if popover_tag == "button" %}
+<button type="button" class="btn btn-primary {{ popover_class }}" data-toggle="popover" data-placement="{{ popover_direction }}" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Toggle Popover</button>
+{% else %}
+<a tabindex="0" role="button" data-trigger="focus" class="btn btn-primary {{ popover_class }}" data-toggle="popover" data-placement="{{ popover_direction }}" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible Popover</a>
+{% endif %}

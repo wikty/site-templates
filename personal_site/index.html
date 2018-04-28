@@ -2,13 +2,15 @@
 {% block main %}
   <div class="container">
     {% include "partials/jumbotron/base.html" %}
+    <h3>Jombotron Template</h3>
+    {% include "partials/jumbotron/tpl.html" %}
   </div>
-  
-  {#
   <div class="container">
-    {% include "partials/popover/toggle.html" %}
-    {% include "partials/popover/dismiss.html" %}
+    {% include "partials/popover/base.html" %}
+    <h3>Popover Template</h3>
+    {% include "partials/popover/tpl.html" %}
   </div>
+  {#
   <div class="container">
       {% include "partials/breadcrumb.html" %}
   </div>
