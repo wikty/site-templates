@@ -60,15 +60,17 @@
     {%  include "partials/list/base.html" %}
   </div>
   <hr class="my-4">
-  {#
-  
-  
-  
   <div class="container">
+    {% include "partials/modal/base.html" %}
+    <h3>Yes-or-No Modal</h3>
     {% include "partials/modal/yes-or-no.html" %}
+    <h3>Image Modal</h3>
     {% include "partials/modal/image.html" %}
+    <h3>Image Grid Modal</h3>
     {% include "partials/modal/image-grid.html" %}
   </div>
+  <hr class="my-4">
+  {#
   <div class="container">
     {% include "partials/elements/code.html" %}
     {% include "partials/elements/img.html" %}
