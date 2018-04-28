@@ -1,7 +1,5 @@
-<!-- Jumbotron: A lightweight, flexible component that can optionally extend the entire viewport to showcase key marketing messages on your site. -->
 {% if jumbotron.fullwidth %}
-<!-- jumbotron occupies the entire horizontal space of its parent. -->
-<{{ jumbotron.tag }} class="jumbotron .jumbotron-fluid text-{{ jumbotron.alignment }}">
+<{{ jumbotron.tag }} class="jumbotron jumbotron-fluid text-{{ jumbotron.alignment }}">
   <div class="container">
 {% else %}
 <{{ jumbotron.tag }} class="jumbotron text-{{ jumbotron.alignment }}">

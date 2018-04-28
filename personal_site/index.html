@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block main %}
   <div class="container">
-    {% include "partials/jumbotron.html" %}
+    {% include "partials/jumbotron/base.html" %}
   </div>
+  
+  {#
   <div class="container">
     {% include "partials/popover/toggle.html" %}
     {% include "partials/popover/dismiss.html" %}
@@ -51,4 +53,5 @@
   <div class="container">
   {% include "partials/media/base.html" %}
   </div>
+  #}
 {% endblock %}
