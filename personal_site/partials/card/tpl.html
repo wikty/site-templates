@@ -1,0 +1,42 @@
+{% set s = card %}
+<div style="{{ card.style if card.style else ""  }}" class="card {{ card.sizing if card.sizing else "" }} {{ ("text-"~s.alignment) if s.alignment else "" }} {{ "text-"~s.color if s.color else "" }} {{ "border-"~s.bg_color if s.bg_color else "" }} {{ "bg-"~s.bg_color if s.bg_color else "" }}">
+  
+  {% if card.header %}
+  <!-- card-header is optional -->
+  {% set s= card.header %}
+  <div class="card-header {{ ("text-"~s.alignment) if s.alignment else "" }} {{ "text-"~s.color if s.color else "" }} {{ "border-"~s.bg_color if s.bg_color else "" }} {{ "bg-"~s.bg_color if s.bg_color else "" }}">
+    {{ card.header.title }}
+  </div>
+  {% endif %}
+  
+  {% if card.img_top %}
+  <!-- .card-img-top places an image to the top of the card. this section is optional -->
+  <img class="card-img-top" data-src="{{card.img_top.image}}" alt="{{card.img_top.title}}">
+  {% endif %}
+  
+  <!-- The building block of a card is the .card-body. Use it whenever you need a padded section within a card. You can add multiple body into the card -->
+  {% if card.body %}
+  {% set s = card.body %}
+  <div class="card-body {{ ("text-"~s.alignment) if s.alignment else "" }} {{ "text-"~s.color if s.color else "" }} {{ "border-"~s.bg_color if s.bg_color else "" }} {{ "bg-"~s.bg_color if s.bg_color else "" }}">
+  {% else %}
+  <div class="card-body">
+  {% endif %}
+    <h5 class="card-title">Article title</h5>
+    <h6 class="card-subtitle mb-2 text-muted">subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Read More...</a>
+  </div>
+  
+  {% if card.img_bottom %}
+  <!-- .card-img-bottom places an image to the bottom of the card. this section is optional -->
+  <img class="card-img-bottom" data-src="{{card.img_bottom.image}}" alt="{{card.img_bottom.title}}">
+  {% endif %}
+
+  {% if card.footer %}
+  <!-- card-footer is optional -->
+  {% set s = card.footer %}
+  <div class="card-footer {{ ("text-"~s.alignment) if s.alignment else "" }} {{ "text-"~s.color if s.color else "" }} {{ "border-"~s.bg_color if s.bg_color else "" }} {{ "bg-"~s.bg_color if s.bg_color else "" }}">
+    {{ card.footer.title }}
+  </div>
+  {% endif %}
+</div>

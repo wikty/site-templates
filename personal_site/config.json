@@ -62,6 +62,50 @@
                 "mode": "slide, fade"
             }
         },
+        "card": {
+            "sizing": "w-75",
+            "style": "",
+            "alignment": "left",
+            "color": "dark",
+            "border_color": "warning",
+            "bg_color": "primary",
+            "img_top": {
+                "image": "holder.js/100px180/?text=Image top cap",
+                "title": "Image Top Cap"
+            },
+            "img_bottom": {
+                "image": "holder.js/100px180/?text=Image bottom cap",
+                "title": "Image Bottom Cap"
+            },
+            "header": {
+                "title": "Card Header",
+                "alignment": "right",
+                "color": "white",
+                "border_color": "warning",
+                "bg_color": "dark"
+            },
+            "footer": {
+                "title": "Card Footer",
+                "alignment": "center",
+                "color": "secondary",
+                "border_color": "danger",
+                "bg_color": "primary"
+            },
+            "body": {
+                "alignment": "left",
+                "color": "dark",
+                "border_color": "warning",
+                "bg_color": "transparent"
+            },
+            "_comment_": {
+                "color": "text-* classes: primary, secondary, dark, light, white, muted, success, error, warning, danger, info",
+                "border_color": "border-* classes: primary, secondary, dark, light, success, error, warning, danger, info",
+                "bg_color": "bg-* classes: primary, secondary, dark, light, transparent, success, error, warning, danger, info",
+                "alignment": "justify, left, right, center",
+                "sizing": "sizing classes",
+                "style": "add style attribution for card element, e.g., width: 18rem;"
+            }
+        },
         "navbar": {
             "id": "navbar",
             "container": true,
