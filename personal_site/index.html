@@ -50,15 +50,19 @@
     {% include "partials/example/panel.html" %}
   </div>
   <hr class="my-4">
+  <div class="container">
+    {% include "partials/embed/base.html" %}
+    <h3>Embed iframe</h3>
+    {% include "partials/embed/iframe.html" %}
+  </div>
+  <hr class="my-4">
   {#
   <div class="container">
     {%  include "partials/list/base.html" %}
   </div>
   <hr class="my-4">
   
-  <div class="container">
-    {% include "partials/embed/iframe.html" %}
-  </div>
+  
   <div class="container">
     {% include "partials/modal/yes-or-no.html" %}
     {% include "partials/modal/image.html" %}
