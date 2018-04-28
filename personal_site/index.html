@@ -33,18 +33,17 @@
   <div class="container">
     <p>{% include "partials/clipboard/base.html" %}</p>
   </div>
+  <div class="container">
+    {%  include "partials/tooltip/base.html" %}
+    <h3>Tooltip Template</h3>
+    {% include "partials/tooltip/tpl.html" %}
+  </div>
+  <hr class="my-4">
   {#
   <div class="container">
     {%  include "partials/list/base.html" %}
   </div>
   <hr class="my-4">
-  {#
-  <div class="container">
-    <h3>Tooltips</h3>
-    {%  include "partials/tooltip/link.html" %}
-    {%  include "partials/tooltip/button.html" %}
-    {%  include "partials/tooltip/disabled.html" %}
-  </div>
   <div class="container">
     {% include "partials/code-snippet.html" %}
   </div>

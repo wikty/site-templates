@@ -106,6 +106,16 @@
                 "style": "add style attribution for card element, e.g., width: 18rem;"
             }
         },
+        "tooltip": {
+            "tag": "button",
+            "direction": "top",
+            "trigger": "hover focus",
+            "_comment_": {
+                "tag": "a, button",
+                "direction": "left, right, top, bottom",
+                "trigger": "hover, focus, click"
+            }
+        },
         "navbar": {
             "id": "navbar",
             "container": true,
