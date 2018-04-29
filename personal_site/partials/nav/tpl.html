@@ -1,11 +1,37 @@
-{% if nav.alignment == "left" %}
-  {% set alignment = "justify-content-start" %}
-{% elif nav.alignment == "right" %}
-  {% set alignment = "justify-content-end" %}
-{% elif nav.alignment == "center" %}
-  {% set alignment = "justify-content-center" %}
+{% if nav.direction == "horizontal" %}
+  {% set vertical_class = "" %}
+
+  {% if nav.alignment == "left" %}
+    {% set alignment = "justify-content-start" %}
+  {% elif nav.alignment == "right" %}
+    {% set alignment = "justify-content-end" %}
+  {% elif nav.alignment == "center" %}
+    {% set alignment = "justify-content-center" %}
+  {% else %}
+    {% set alignment = "" %}
+  {% endif %}
+
+  {% if nav.extend == "fill" %}
+    {% set extend = "nav-fill" %}
+  {% elif nav.extend == "justified" %}
+    {% set extend = "nav-justified" %}
+  {% else %}
+    {% set extend = "" %}
+  {% endif %}
+
+  {% if nav.breakpoint %}
+    {% set nav_bk = ("flex-column flex-%s-row"|format(nav.breakpoint)) %}
+    {% set item_bk = ("flex-%s-fill text-%s-center"|format(nav.breakpoint, nav.breakpoint)) %}
+  {% else %}
+    {% set nav_bk = "" %}
+    {% set item_bk = "" %}
+  {% endif %}
 {% else %}
+  {% set vertical_class = "flex-column" %}
   {% set alignment = "" %}
+  {% set extend = "" %}
+  {% set nav_bk = "" %}
+  {% set item_bk = "" %}
 {% endif %}
 
 {% if nav.mode == "tab" %}
@@ -16,25 +42,40 @@
   {% set mode = "" %}
 {% endif %}
 
-{% if nav.extend == "fill" %}
-  {% set extend = "nav-fill" %}
-{% elif nav.mode == "justified" %}
-  {% set extend = "nav-justified" %}
-{% else %}
-  {% set extend = "" %}
-{% endif %}
+{% set tag = "nav" if nav.tag == "nav" else "ul" %}
 
-<ul class="nav {{ mode }} {{ alignment }} {{ extend }}">
-  <li class="nav-item">
+<{{tag}} class="nav {{ vertical_class }} {{ mode }} {{ alignment }} {{ extend }} {{ nav_bk }}">
+
+{% if tag == "ul" %}
+  <li class="nav-item {{ item_bk }}">
     <a class="nav-link active" href="#">Active</a>
   </li>
-  <li class="nav-item">
+{% else %}
+  <a class="nav-item nav-link active  {{ item_bk }}" href="#">Active</a>
+{% endif %}
+
+{% if tag == "ul" %}
+  <li class="nav-item {{ item_bk }}">
     <a class="nav-link" href="#">Link</a>
   </li>
-  <li class="nav-item">
+{% else %}
+  <a class="nav-item nav-link {{ item_bk }}" href="#">Link</a>
+{% endif %}
+
+{% if tag == "ul" %}
+  <li class="nav-item {{ item_bk }}">
     <a class="nav-link" href="#">Link</a>
   </li>
-  <li class="nav-item">
+{% else %}
+  <a class="nav-item nav-link {{ item_bk }}" href="#">Link</a>
+{% endif %}
+
+{% if tag == "ul" %}
+  <li class="nav-item {{ item_bk }}">
     <a class="nav-link disabled" href="#">Disabled</a>
   </li>
-</ul>
+{% else %}
+  <a class="nav-item nav-link disabled {{ item_bk }}" href="#">Disabled</a>
+{% endif %}
+
+</{{tag}}>

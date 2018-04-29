@@ -124,13 +124,34 @@
             "clipboard_button_svg": "/img/clippy.svg"
         },
         "nav": {
-            "mode": "tab",
+            "mode": "pill",
+            "tag": "ul",
+            "direction": "horizontal",
             "alignment": "right",
             "extend": "justified",
+            "breakpoint": "sm",
             "_comment_": {
                 "mode": ", tab, pill",
+                "tag": "ul",
+                "direction": ", vertical, horizontal",
                 "alignment": ", left, right, center",
-                "extend": ", fill, justified"
+                "extend": ", fill, justified",
+                "breakpoint": ", xs, sm, md, lg, xl"
+            }
+        },
+        "navtab": {
+            "id_prefix": "navtab",
+            "mode": "tab",
+            "direction": "horizontal",
+            "alignment": "right",
+            "extend": "justified",
+            "tag": "ul",
+            "_comment_": {
+                "mode": "tab, pill",
+                "direction": ", vertical, horizontal",
+                "alignment": ", left, right, center",
+                "extend": ", fill, justified",
+                "tag": "ul, nav"
             }
         },
         "navbar": {

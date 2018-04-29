@@ -1,0 +1,88 @@
+{% set rand_id = (range(1, 9999) | random) %}
+{% set navtab_id = ("%s-%s" | format(navtab.id_prefix, rand_id)) %}
+{% set navtab_content_id = ("%s-content-%s" | format(navtab.id_prefix, rand_id)) %}
+
+{% if navtab.direction == "horizontal" %}
+  {% set vertical_class = "" %}
+
+  {% if navtab.alignment == "left" %}
+    {% set alignment = "justify-content-start" %}
+  {% elif navtab.alignment == "right" %}
+    {% set alignment = "justify-content-end" %}
+  {% elif navtab.alignment == "center" %}
+    {% set alignment = "justify-content-center" %}
+  {% else %}
+    {% set alignment = "" %}
+  {% endif %}
+
+  {% if navtab.extend == "fill" %}
+    {% set extend = "nav-fill" %}
+  {% elif navtab.extend == "justified" %}
+    {% set extend = "nav-justified" %}
+  {% else %}
+    {% set extend = "" %}
+  {% endif %}
+{% else %}
+  {% set vertical_class = "flex-column" %}
+  {% set alignment = "" %}
+  {% set extend = "" %}
+{% endif %}
+
+{% if navtab.mode == "tab" %}
+  {% set mode = "nav-tabs" %}
+{% elif navtab.mode == "pill" %}
+  {% set mode = "nav-pills" %}
+{% else %}
+  {% set mode = "" %}
+{% endif %}
+
+{% set tag = "nav" if navtab.tag == "nav" else "ul" %}
+
+{% if navtab.direction == "vertical" %}
+<div class="row">
+  <!-- vertical layout for navtab column-3 -->
+  <div class="col-3">
+{% endif %}
+
+{% if tag == "ul" %}
+<!-- navigation tabs -->
+<ul class="nav {{ mode }} {{ alignment }} {{ extend }} {{ vertical_class }}" id="{{ navtab_id }}" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab-{{rand_id}}" data-toggle="tab" href="#home-{{rand_id}}" role="tab" aria-controls="home" aria-selected="true">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab-{{rand_id}}" data-toggle="tab" href="#profile-{{rand_id}}" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab-{{rand_id}}" data-toggle="tab" href="#contact-{{rand_id}}" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+  </li>
+</ul>
+{% else %}
+<!-- navigation tabs -->
+<nav>
+  <div class="nav {{ mode }} {{ alignment }} {{ extend }} {{ vertical_class }}" id="{{ navtab_id }}" role="tablist">
+    <a class="nav-item nav-link active" id="home-tab-{{rand_id}}" data-toggle="tab" href="#home-{{rand_id}}" role="tab" aria-controls="home" aria-selected="true">Home</a>
+    <a class="nav-item nav-link" id="profile-tab-{{rand_id}}" data-toggle="tab" href="#profile-{{rand_id}}" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+    <a class="nav-item nav-link" id="contact-tab-{{rand_id}}" data-toggle="tab" href="#contact-{{rand_id}}" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+  </div>
+</nav>
+
+{% endif %}
+
+{% if navtab.direction == "vertical" %}
+  </div>
+  <!-- vertical layout for navcontent column-9 -->
+  <div class="col-9">
+{% endif %}
+
+<!-- navigation content -->
+<div class="tab-content" id="{{ navtab_content_id }}">
+  <div class="tab-pane fade show active" id="home-{{rand_id}}" role="tabpanel" aria-labelledby="home-tab-{{rand_id}}">Home Tab Content</div>
+  <div class="tab-pane fade" id="profile-{{rand_id}}" role="tabpanel" aria-labelledby="profile-tab-{{rand_id}}">Profile Tab Content</div>
+  <div class="tab-pane fade" id="contact-{{rand_id}}" role="tabpanel" aria-labelledby="contact-tab-{{rand_id}}">Contact Tab Content</div>
+</div>
+
+{% if navtab.direction == "vertical" %}
+  </div>
+</div>
+{% endif %}
