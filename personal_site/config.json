@@ -155,21 +155,30 @@
             }
         },
         "navbar": {
-            "id": "navbar",
-            "container": true,
+            "id_prefix": "navbar",
+            "outer_container": true,
+            "inner_container": false,
             "rounded": false,
             "position": "top",
-            "bg_mode_class": "navbar-dark",
-            "bg_color_class": "bg-dark",
-            "collapse_breakpoint": "md",
+            "bg_mode": "dark",
+            "bg_color": "dark",
+            "style": "",
+            "breakpoint": "md",
+            "collapsed": true,
+            "toggler_alignment": "right",
+            "text": "Navbar text with an inline element",
             "brand": {
                 "title": "Navbar",
                 "link": "#",
                 "image": {
                     "link": "/img/bootstrap-solid.svg",
-                    "width": 30,
-                    "height": 30,
                     "alt": "Brand Image"
+                }
+            },
+            "nav": {
+                "tag": "ul",
+                "_comment_": {
+                    "tag": "ul, div"
                 }
             },
             "items": [{
@@ -183,12 +192,17 @@
                 "link": "/gallery-thumbnail.html"
             }],
             "_comment_": {
-                "position": "top, bottom, static",
-                "bg-mode-class": "navbar-dark, navbar-light",
-                "bg-color-class": "bg-*",
-                "collapse-breakpoint": "sm, md, lg, xl",
+                "position": "top, bottom, stickied, static",
+                "bg-mode": "dark, light",
+                "bg-color": "bg-* classes: dark, white, primary,,,",
+                "style": "custom css for navbar, e.g., background-color: #e3f2fd;",
+                "breakpoint": ", sm, md, lg, xl",
+                "collapsed": "if breakpoint is empty, collapsed=true means always collapse, collapsed=false means never collapse",
                 "brand": "add title or image, yeah you can add both of them",
-                "items": "conflict with items(), please using ['items'] in template"
+                "items": "conflict with items(), please using ['items'] in template",
+                "outer_container": "wrap a navbar in a .container to center it on a page",
+                "inner_container": " add a .container within to only center the contents of a fixed or static top navbar.",
+                "toggler_alignment": "left, right, inner; how to align brand and responsive toggler button"
             }
         },
         "footer": {

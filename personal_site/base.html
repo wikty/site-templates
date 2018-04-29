@@ -12,7 +12,8 @@
 
     {% block static %}{% endblock %}
 
-    {% block style %}
+    <!-- Fixed navbars use position: fixed, meaning they’re pulled from the normal flow of the DOM and may require custom CSS (e.g., padding-top on the <body>) to prevent overlap with other elements. -->
+    {% block styles %}
     <style type="text/css">
       {% if navbar.position == "top" %}
       body {
@@ -24,6 +25,8 @@
       }
       {% elif navbar.position == "static" %}
       /* add margin-bottom in navbar */
+      {% elif navbar.position == "stickied" %}
+      /* some browser don't support sticky position */
       {% endif %}
     </style>
     {% endblock %}

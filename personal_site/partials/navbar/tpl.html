@@ -1,0 +1,163 @@
+{% set rand_id = (range(1, 9999) | random) %}
+{% set navbar_id = ("%s-%s" | format(navbar.id_prefix, rand_id)) %}
+
+<!-- Note:
+Fixed navbars use position: fixed, meaning they’re pulled from the normal flow of the DOM and may require custom CSS (e.g., padding-top on the <body>) to prevent overlap with other elements.
+Also note that .sticky-top uses position: sticky, which isn’t fully supported in every browser.
+ -->
+{% if navbar.position == "top" %}
+  <!-- navbar is fixed in window's top -->
+  {% set position = "fixed-top" %}
+{% elif navbar.position == "bottom" %}
+  <!-- navbar is fixed in window's bottom -->
+  {% set position = "fixed-bottom" %}
+{% elif navbar.position == "stickied" %}
+  <!-- navbar scrolls with the page until it reaches the top, then stays there -->
+  {% set position = "sticky-top" %}
+{% else %}
+  <!-- navbar is static, add margin-bottom for it -->
+  {% set position = "mb-4" %}
+{% endif %}
+
+{% if navbar.breakpoint %}
+  <!-- navbar responsive collapse -->
+  {% set breakpoint = ("navbar-expand-" ~ navbar.breakpoint) %}
+{% else %}
+  {% if navbar.collapsed %}
+  <!-- navbar always collapse(never expand) -->
+    {% set breakpoint = "" %}
+  {% else %}
+  <!-- navbar never collapse(always expand) -->
+    {% set breakpoint = "navbar-expand" %}
+  {% endif %}
+{% endif %}
+
+{% set bg_mode = (("navbar-" ~ navbar.bg_mode) if navbar.bg_mode else "") %}
+{% set bg_color = (("bg-" ~ navbar.bg_color) if navbar.bg_color else "") %}
+{% set round = ("rounded" if navbar.rounded else "") %}
+
+{# macro just like a function for re-using #}
+{% macro brand(title, link, image, alt) -%}
+      {% if link %}
+      <!-- Navbar Brand Link(Image/Text) -->
+      <a class="navbar-brand" href="{{ link }}">
+      {% if image %}
+        <img src="{{ link }}" width="30" height="30" alt="{{ alt }}" {% if title %}class="d-inline-block align-top"{% endif %}>
+      {% endif %}
+      {{ title }}
+      </a>
+      {% else %}
+      <!-- Navbar Brand Title(Text) -->
+      <span class="navbar-brand mb-0 h1">{{ title }}</span>
+      {% endif %}
+{%- endmacro %}
+
+
+{% if navbar.outer_container %}
+<!-- add outer container for navbar to center it on the page -->
+<div class="container">
+{% endif %}
+
+<nav class="navbar {{ breakpoint }} {{ bg_mode }} {{ bg_color }} {{ position }} {{ round }}" {{ navbar.style|default("", true) }}>
+      {% if navbar.inner_container %}
+      <!-- add inner container for fixed or static navbar to center its content -->
+      <div class="container">
+      {% endif %}
+
+      {#
+      {% if narbar.brand.link %}
+      <!-- Navbar Brand Link(Image/Text) -->
+      <a class="navbar-brand" href="{{ navbar.brand.link }}">
+      {% if navbar.brand.image %}
+        <img src="{{ navbar.brand.image.link }}" width="30" height="30" alt="{{ navbar.brand.image.alt }}" {% if navbar.brand.title %}class="d-inline-block align-top"{% endif %}>
+      {% endif %}
+      {{ navbar.brand.title }}
+      </a>
+      {% else %}
+      <!-- Navbar Brand Title(Text) -->
+      <span class="navbar-brand mb-0 h1">{{ navbar.brand.title }}</span>
+      {% endif %}
+      #}
+
+      {% if navbar.toggler_alignment == "left" %}
+        {{ brand(navbar.brand.title, navbar.brand.link, navbar.brand.image, navbar.brand.alt) }}
+      {% endif %}
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#{{ navbar_id }}" aria-controls="{{ navbar_id }}" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      {% if navbar.toggler_alignment == "right" %}
+        {{ brand(navbar.brand.title, navbar.brand.link, navbar.brand.image, navbar.brand.alt) }}
+      {% endif %}
+
+      <div class="collapse navbar-collapse" id="{{ navbar_id }}">
+        
+        {% if navbar.toggler_alignment == "inner" %}
+          {{ brand(navbar.brand.title, navbar.brand.link, navbar.brand.image, navbar.brand.alt) }}
+        {% endif %}
+
+        <!-- Navbar's navigation container start tag -->
+        {% if navbar.nav.tag == "ul" %}
+        <ul class="navbar-nav mr-auto">
+        {% else %}
+        <div class="navbar-nav mr-auto">
+        {% endif %}
+
+        <!-- Navbar's navigation links -->
+        {% for item in navbar['items'] %}
+          {% set active = "active" if ("%s%s"|format(item.link, "index.html")) == URL else "" %}
+          {% if navbar.nav.tag == "ul" %}
+          <li class="nav-item {{ active }}">
+            <a class="nav-link" href="{{ item.link }}">{{ item.title }}{{ active|default(' <span class="sr-only">(current)</span>', true) }}</a>
+          </li>
+          {% else %}
+          <a class="nav-item nav-link {{ active }}" href="{{ item.link }}">{{ item.title }}{{ active|default(' <span class="sr-only">(current)</span>', true) }}</a>
+          {% endif %}
+        {% endfor %}
+
+          <!-- Navbar's navigation dropdown menu -->
+          {% if navbar.nav.tag == "ul" %}
+          <li class="nav-item dropdown">
+          {% else %}
+          <div class="nav-item dropdown">
+          {% endif %}
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Action1</a>
+              <a class="dropdown-item" href="#">Action2</a>
+              <a class="dropdown-item" href="#">Action3</a>
+            </div>
+          {% if navbar.nav.tag == "ul" %}
+          </li>
+          {% else %}
+          </div>
+          {% endif %}
+
+          {% if navbar.text %}
+          <span class="navbar-text">{{ navbar.text }}</span>
+          {% endif %}
+
+        {% if navbar.nav.tag == "ul" %}
+        </ul>
+        {% else %}
+        </div>
+        {% endif %}
+        <!-- Navbar's navigation container end tag -->
+
+        <!-- Navbar inline form -->
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+
+      {% if navbar.inner_container %}
+      <!-- add inner container for fixed or static navbar to center its content -->
+      </div>
+      {% endif %}
+</nav>
+
+{% if navbar.outer_container %}
+</div>
+{% endif %}
