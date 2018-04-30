@@ -2,7 +2,6 @@
 <{{ jumbotron.tag }} class="jumbotron jumbotron-fluid text-{{ jumbotron.alignment }}">
   <div class="container">
 {% else %}
-
 <{{ jumbotron.tag }} class="jumbotron text-{{ jumbotron.alignment }}">
 {% endif %}
 
@@ -12,7 +11,7 @@
         <p class="lead">It uses utility classes for typography and spacing to space content out within the larger container.</p>
         <a class="btn btn-lg btn-primary" href="#" role="button">Learn More &raquo;</a>
 
-{% if jumbotron.full_width %}
+{% if jumbotron.fullwidth %}
   </div>
 </{{ jumbotron.tag }}>
 {% else %}
