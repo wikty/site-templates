@@ -23,6 +23,7 @@ params = {
 
 
 site_static_dirname = 'static'
+site_partials_dirname = 'partials'
 site_output_dirname = 'output'
 site_tpl_encoding = 'utf8'
 site_cfg_filename = 'config.json'

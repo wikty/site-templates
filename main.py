@@ -119,13 +119,17 @@ def render_site(site,
                 cfg_filename, 
                 output_dirname,
                 static_dirname, 
+                partials_dirname,
                 msg_file, 
                 cmd_params={}, 
                 tpl_encoding='utf8', 
                 ignore_html_comment=False):
-    if (os.path.normcase(os.path.normpath(output_dirname)).lower() == 
-            os.path.normcase(os.path.normpath(static_dirname)).lower()):
-        raise Error('Site static directory cannot be same with output directory')
+    norm_output_dirname = os.path.normcase(os.path.normpath(output_dirname)).lower()
+    if ((norm_output_dirname == 
+            os.path.normcase(os.path.normpath(static_dirname)).lower()) or (
+        norm_output_dirname ==
+            os.path.normcase(os.path.normpath(partials_dirname)).lower())):
+        raise Error('Site output directory cannot be same with static and partials directory')
     # re-create output directory and copy static resources
     site_dir = config.sites[site]['path']
     templates = config.sites[site]['templates']
@@ -334,6 +338,9 @@ if __name__ == '__main__':
     parser.add_argument("-s", "--static", 
                         help="Site static directory Name(In Site Dir). Default: %(default)s", 
                         default=config.site_static_dirname)
+    parser.add_argument("-t", "--partials", 
+                        help="Site template partials directory Name(In Site Dir). Default: %(default)s", 
+                        default=config.site_partials_dirname)
     parser.add_argument("-e", "--encoding", 
                         help="Site template encoding. Default: %(default)s", 
                         default=config.site_tpl_encoding)
@@ -384,6 +391,7 @@ if __name__ == '__main__':
         'cfg_filename': args.cfg,
         'output_dirname': args.output,
         'static_dirname': args.static,
+        'partials_dirname': args.partials,
         'msg_file': args.messageio,
         'cmd_params': params,
         'tpl_encoding': args.encoding,
