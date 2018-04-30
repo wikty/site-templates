@@ -92,6 +92,40 @@ def load_tpl_params(site, tpl, site_cfg={}, site_params={}):
 def remove_html_comment_filter(content):
     return re.sub(r'<!--(.*?)-->', '', content)
 
+def render_init(site, 
+                cfg_filename, 
+                output_dirname,
+                static_dirname, 
+                partials_dirname,
+                cmd_params={},
+                tpl_encoding='utf8'):
+    norm_output_dirname = os.path.normcase(os.path.normpath(output_dirname)).lower()
+    if ((norm_output_dirname == 
+            os.path.normcase(os.path.normpath(static_dirname)).lower()) or (
+        norm_output_dirname ==
+            os.path.normcase(os.path.normpath(partials_dirname)).lower())):
+        raise Error('Site output directory cannot be same with static and partials directory')
+    # re-create output directory and copy static resources
+    site_dir = config.sites[site]['path']
+    templates = config.sites[site]['templates']
+    static_dir = os.path.join(site_dir, static_dirname)
+    partials_dir = os.path.join(site_dir, partials_dirname)
+    output_dir = os.path.join(site_dir, output_dirname)
+    cfg_file = os.path.join(site_dir, cfg_filename)     
+    site_cfg = load_site_config(cfg_file)
+    site_params = load_site_params(site, site_cfg, cmd_params)
+    env = Environment(loader=FileSystemLoader(site_dir, tpl_encoding))
+    return {
+        'site_dir': site_dir,
+        'static_dir': static_dir,
+        'partials_dir': partials_dir,
+        'output_dir': output_dir,
+        'site_cfg': site_cfg,
+        'site_params': site_params,
+        'env': env,
+        'templates': templates
+    }
+
 def render_tpl(site, env, tpl, site_cfg, site_params, output_dir, ignore_html_comment=False, output_encoding='utf8'):
     '''
     tpl: directory separator is /, not \
@@ -124,28 +158,28 @@ def render_site(site,
                 cmd_params={}, 
                 tpl_encoding='utf8', 
                 ignore_html_comment=False):
-    norm_output_dirname = os.path.normcase(os.path.normpath(output_dirname)).lower()
-    if ((norm_output_dirname == 
-            os.path.normcase(os.path.normpath(static_dirname)).lower()) or (
-        norm_output_dirname ==
-            os.path.normcase(os.path.normpath(partials_dirname)).lower())):
-        raise Error('Site output directory cannot be same with static and partials directory')
-    # re-create output directory and copy static resources
-    site_dir = config.sites[site]['path']
-    templates = config.sites[site]['templates']
-    static_dir = os.path.join(site_dir, static_dirname)
-    output_dir = os.path.join(site_dir, output_dirname)
-    cfg_file = os.path.join(site_dir, cfg_filename)        
+    data = render_init(site,
+                    cfg_filename,
+                    output_dirname,
+                    static_dirname,
+                    partials_dirname,
+                    cmd_params,
+                    tpl_encoding)
+    site_dir = data['site_dir']
+    output_dir = data['output_dir']
+    static_dir = data['static_dir']
+    partials_dir = data['partials_dir']
+    site_cfg = data['site_cfg']
+    site_params = data['site_params']
+    env = data['env']
+    templates = data['templates']
+    # clean output dir and copy static dir
     if os.path.isdir(output_dir):
         shutil.rmtree(output_dir)
     if not os.path.isdir(static_dir):
         os.makedirs(output_dir)
     else:
         shutil.copytree(static_dir, output_dir)
-    # init
-    site_cfg = load_site_config(cfg_file)
-    site_params = load_site_params(site, site_cfg, cmd_params)
-    env = Environment(loader=FileSystemLoader(site_dir, tpl_encoding))
     # render templates
     for path in templates:
         full_path = os.path.join(site_dir, path)
@@ -344,6 +378,9 @@ if __name__ == '__main__':
     parser.add_argument("-e", "--encoding", 
                         help="Site template encoding. Default: %(default)s", 
                         default=config.site_tpl_encoding)
+    parser.add_argument("-T", "--tpl", 
+                        help="Render a template", 
+                        default="")
     parser.add_argument("-S", "--server", 
                         help="Run server", 
                         action="store_true",
@@ -385,23 +422,27 @@ if __name__ == '__main__':
         print('The site {} not in examples.'.format(args.site))
         sys.exit()
 
-
-    render_kwargs = {
-        'site': site,
-        'cfg_filename': args.cfg,
-        'output_dirname': args.output,
-        'static_dirname': args.static,
-        'partials_dirname': args.partials,
-        'msg_file': args.messageio,
-        'cmd_params': params,
-        'tpl_encoding': args.encoding,
-        'ignore_html_comment': args.ignore
-    }
-    render_site(**render_kwargs)
-
-    if args.server:
-        server_site(site, 
-                    args.port,
-                    args.watch,
-                    render_site,
-                    render_kwargs)
+    if not args.tpl:
+        # render the whole site
+        render_kwargs = {
+            'site': site,
+            'cfg_filename': args.cfg,
+            'output_dirname': args.output,
+            'static_dirname': args.static,
+            'partials_dirname': args.partials,
+            'msg_file': args.messageio,
+            'cmd_params': params,
+            'tpl_encoding': args.encoding,
+            'ignore_html_comment': args.ignore
+        }
+        render_site(**render_kwargs)
+        # serve the site
+        if args.server:
+            server_site(site, 
+                        args.port,
+                        args.watch,
+                        render_site,
+                        render_kwargs)
+    else:
+        # render a template, and output in stdout
+        pass
