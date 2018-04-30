@@ -147,13 +147,16 @@ def render_tpl(site, env, tpl, site_cfg, site_params, output_dir, filters=[], ou
         raise
     for f in filters:
         c = f(tpl, c)
-    output_file = os.path.join(output_dir, tpl)
-    dirname = os.path.dirname(output_file)
-    if not os.path.isdir(dirname):
-        os.makedirs(dirname)
-    with open(output_file, 'w', encoding=output_encoding) as f:
-        f.write(c)
-    return os.path.normcase(output_file), c
+    if output_dir:
+        output_file = os.path.join(output_dir, tpl)
+        dirname = os.path.dirname(output_file)
+        if not os.path.isdir(dirname):
+            os.makedirs(dirname)
+        with open(output_file, 'w', encoding=output_encoding) as f:
+            f.write(c)
+        return os.path.normcase(output_file), c
+    else:
+        return None, c
 
 # render a site
 def render_site(site, 
@@ -448,4 +451,17 @@ if __name__ == '__main__':
                         render_kwargs)
     else:
         # render a template, and output in stdout
-        pass
+        data = render_init(site,
+                        args.cfg,
+                        args.output,
+                        args.static,
+                        args.partials,
+                        params,
+                        args.encoding)
+        print(render_tpl(site,
+                    data['env'],
+                    args.tpl.lstrip('\\').lstrip('/'),
+                    data['site_cfg'],
+                    data['site_params'],
+                    None,
+                    filters)[1])
