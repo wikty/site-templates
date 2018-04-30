@@ -1,0 +1,3 @@
+<div class="progress" style="height: {{ progressbar.height  }};">
+  <div class="progress-bar {{ ("bg-"~progressbar.background) if progressbar.background else "" }} {{ "progress-bar-striped" if progressbar.striped else "" }} {{ "progress-bar-animated" if progressbar.animated else "" }}" role="progressbar" style="width: {{ progressbar.width  }};" aria-valuenow="{{ progressbar.value }}" aria-valuemin="0" aria-valuemax="100">{{ progressbar.label }}</div>
+</div>

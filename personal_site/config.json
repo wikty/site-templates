@@ -209,6 +209,15 @@
             "container": true,
             "border_top": true,
             "color": "muted"
+        },
+        "progressbar": {
+            "value": "75",
+            "width": "75%",
+            "height": "20px",
+            "label": "75%",
+            "background": "primary",
+            "striped": true,
+            "animated": true
         }
     },
     "local": {
