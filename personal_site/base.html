@@ -11,9 +11,9 @@
     {{ bootstrap_css_tag }}
 
     {% block static %}{% endblock %}
-
-    <!-- Fixed navbars use position: fixed, meaning they’re pulled from the normal flow of the DOM and may require custom CSS (e.g., padding-top on the <body>) to prevent overlap with other elements. -->
+   
     {% block styles %}
+    <!-- Fixed navbars use position: fixed, meaning they’re pulled from the normal flow of the DOM and may require custom CSS (e.g., padding-top on the <body>) to prevent overlap with other elements. -->
     <style type="text/css">
       {% if navbar.position == "top" %}
       body {

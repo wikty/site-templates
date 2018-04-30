@@ -166,7 +166,7 @@
             "breakpoint": "md",
             "collapsed": true,
             "toggler_alignment": "right",
-            "text": "Navbar text with an inline element",
+            "text": "Navbar text",
             "brand": {
                 "title": "Navbar",
                 "link": "#",
