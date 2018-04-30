@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block main %}
-  <div class="container">
+  <div id="part-1" class="container">
     {% include "partials/jumbotron/base.html" %}
     <h3>Jombotron Template</h3>
-    {% include "partials/jumbotron/tpl.html" %}
+    {#% include "partials/jumbotron/tpl.html" %#}
   </div>
   <hr class="my-4">
   <div class="container">
@@ -30,7 +30,7 @@
     {% include "partials/card/tpl.html" %}
   </div>
   <hr class="my-4">
-  <div class="container">
+  <div id="part-2" class="container">
     <p>{% include "partials/clipboard/base.html" %}</p>
   </div>
   <div class="container">
@@ -79,7 +79,7 @@
     {% include "partials/nav/tpl.html" %}
   </div>
   <hr class="my-4">
-  <div class="container">
+  <div id="part-3" class="container">
     {% include "partials/navtab/base.html" %}
     <h3>NavTab Template</h3>
     {% include "partials/navtab/tpl.html" %}

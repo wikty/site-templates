@@ -155,6 +155,7 @@
             }
         },
         "navbar": {
+            "id": "navbar-main",
             "id_prefix": "navbar",
             "outer_container": true,
             "inner_container": false,
@@ -165,6 +166,7 @@
             "style": "",
             "breakpoint": "md",
             "collapsed": true,
+            "scrollpy": true,
             "toggler_alignment": "right",
             "text": "Navbar text",
             "brand": {
@@ -190,6 +192,15 @@
             },{
                 "title": "Gallery - thumbnail",
                 "link": "/gallery-thumbnail.html"
+            },{
+                "title": "Part1",
+                "link": "#part-1"
+            },{
+                "title": "Part2",
+                "link": "#part-2"
+            },{
+                "title": "Part3",
+                "link": "#part-3"
             }],
             "_comment_": {
                 "position": "top, bottom, stickied, static",

@@ -31,7 +31,11 @@
     </style>
     {% endblock %}
   </head>
+  {% if navbar.scrollpy %}
+  <body style="position: relative;"  data-spy="scroll" data-target="#{{ navbar.id }}">
+  {% else %}
   <body>
+  {% endif %}
 
     <header id="page-header">
       {% block header %}{% include "partials/header/tpl.html" %}{% endblock %}

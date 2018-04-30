@@ -58,7 +58,7 @@ Also note that .sticky-top uses position: sticky, which isn’t fully supported 
 <div class="container">
 {% endif %}
 
-<nav class="navbar {{ breakpoint }} {{ bg_mode }} {{ bg_color }} {{ position }} {{ round }}" {{ navbar.style|default("", true) }}>
+<nav id="{{ navbar.id }}" class="navbar {{ breakpoint }} {{ bg_mode }} {{ bg_color }} {{ position }} {{ round }}" {{ navbar.style|default("", true) }}>
       {% if navbar.inner_container %}
       <!-- add inner container for fixed or static navbar to center its content -->
       <div class="container">
