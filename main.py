@@ -89,9 +89,14 @@ def load_tpl_params(site, tpl, site_cfg={}, site_params={}):
     })
     return p
 
-def remove_html_comment_filter(content):
-    return re.sub(r'<!--(.*?)-->', '', content)
+# template filters
+def remove_html_comment_filter(tpl, content):
+    return re.sub(r'<!--(.*?)-->', '', content, flags=re.DOTALL)
 
+def remove_empty_line_filter(tpl, content):
+    return re.sub(r'^\s*$', '', content, flags=re.MULTILINE)
+
+# load render parameters/configuration
 def render_init(site, 
                 cfg_filename, 
                 output_dirname,
@@ -126,7 +131,8 @@ def render_init(site,
         'templates': templates
     }
 
-def render_tpl(site, env, tpl, site_cfg, site_params, output_dir, ignore_html_comment=False, output_encoding='utf8'):
+# render a template
+def render_tpl(site, env, tpl, site_cfg, site_params, output_dir, filters=[], output_encoding='utf8'):
     '''
     tpl: directory separator is /, not \
     '''
@@ -139,8 +145,8 @@ def render_tpl(site, env, tpl, site_cfg, site_params, output_dir, ignore_html_co
         raise
     except TemplateSyntaxError as e:
         raise
-    if ignore_html_comment:
-        c = remove_html_comment_filter(c)
+    for f in filters:
+        c = f(tpl, c)
     output_file = os.path.join(output_dir, tpl)
     dirname = os.path.dirname(output_file)
     if not os.path.isdir(dirname):
@@ -149,6 +155,7 @@ def render_tpl(site, env, tpl, site_cfg, site_params, output_dir, ignore_html_co
         f.write(c)
     return os.path.normcase(output_file), c
 
+# render a site
 def render_site(site, 
                 cfg_filename, 
                 output_dirname,
@@ -157,7 +164,7 @@ def render_site(site,
                 msg_file, 
                 cmd_params={}, 
                 tpl_encoding='utf8', 
-                ignore_html_comment=False):
+                filters=[]):
     data = render_init(site,
                     cfg_filename,
                     output_dirname,
@@ -190,7 +197,7 @@ def render_site(site,
                                         site_cfg, 
                                         site_params, 
                                         output_dir,
-                                        ignore_html_comment)
+                                        filters)
             message('Render', 
                     'ouput file', 
                     msg_file,
@@ -207,7 +214,7 @@ def render_site(site,
                                                 site_cfg, 
                                                 site_params, 
                                                 output_dir,
-                                                ignore_html_comment)
+                                                filters)
                     message('Render', 
                             'ouput file', 
                             msg_file,
@@ -323,16 +330,6 @@ def server_site(site, port, watching, renderer, render_kwargs):
                                   regex,
                                   msg_file)
         watch_thread.start()
-        # watch_thread = threading.Thread(name="watcher",
-        #                                 target=watcher,
-        #                                 args=(site_dir, 
-        #                                       output_dir, 
-        #                                       renderer, 
-        #                                       render_kwargs,
-        #                                       regex,
-        #                                       msg_file,
-        #                                       event))
-        # watch_thread.start()
     # start server in main thread, so that KeyboardInterrupt can be captured
     try:
         server(current_dir, output_dir, port, msg_file)
@@ -397,7 +394,7 @@ if __name__ == '__main__':
                         action="store_true",
                         default=False)
     parser.add_argument("-i", "--ignore", 
-                        help="Ignore template html comment", 
+                        help="Ignore template html comment/empty line", 
                         action="store_false")
     parser.add_argument("-m", "--messageio", 
                         help="Write feedback message into the IO object. Type: %(type)s", 
@@ -422,6 +419,12 @@ if __name__ == '__main__':
         print('The site {} not in examples.'.format(args.site))
         sys.exit()
 
+    filters = []
+    if args.ignore:
+        filters.append(remove_html_comment_filter)
+        filters.append(remove_empty_line_filter)
+        
+
     if not args.tpl:
         # render the whole site
         render_kwargs = {
@@ -433,7 +436,7 @@ if __name__ == '__main__':
             'msg_file': args.messageio,
             'cmd_params': params,
             'tpl_encoding': args.encoding,
-            'ignore_html_comment': args.ignore
+            'filters': filters
         }
         render_site(**render_kwargs)
         # serve the site
