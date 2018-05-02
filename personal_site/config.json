@@ -187,12 +187,6 @@
                 "title": "Home",
                 "link": "/"
             },{
-                "title": "Gallery - card",
-                "link": "/gallery-card.html"
-            },{
-                "title": "Gallery - thumbnail",
-                "link": "/gallery-thumbnail.html"
-            },{
                 "title": "Part1",
                 "link": "#part-1"
             },{

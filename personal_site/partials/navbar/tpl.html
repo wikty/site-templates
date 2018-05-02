@@ -109,10 +109,10 @@ Also note that .sticky-top uses position: sticky, which isn’t fully supported 
           {% set active = "active" if ("%s%s"|format(item.link, "index.html")) == URL else "" %}
           {% if navbar.nav.tag == "ul" %}
           <li class="nav-item {{ active }}">
-            <a class="nav-link" href="{{ item.link }}">{{ item.title }}{{ active|default(' <span class="sr-only">(current)</span>', true) }}</a>
+            <a class="nav-link" href="{{ item.link }}">{{ item.title }}{{ ' <span class="sr-only">(current)</span>' if active else '' }}</a>
           </li>
           {% else %}
-          <a class="nav-item nav-link {{ active }}" href="{{ item.link }}">{{ item.title }}{{ active|default(' <span class="sr-only">(current)</span>', true) }}</a>
+          <a class="nav-item nav-link {{ active }}" href="{{ item.link }}">{{ item.title }}{{ ' <span class="sr-only">(current)</span>' if active else '' }}</a>
           {% endif %}
         {% endfor %}
 
