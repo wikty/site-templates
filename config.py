@@ -4,7 +4,7 @@ sites = {
 
 sites['personal-site'] = {
     'path': './personal_site',
-    'templates': ['index.html', 'gallery-card.html', 'gallery-thumbnail.html'],
+    'templates': ['index.html', 'gallery-card.html', 'gallery-thumbnail.html', 'sidebar.html'],
     'params': {
         'baseurl': 'http://localhost/'
     }
